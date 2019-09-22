@@ -53,6 +53,9 @@ var createInstance = (function () {
         return instance || (instance = new Modal('modal', '这是一个弹框'))
     }
 })()
+//1. 最重要的部分，利用闭包封装了instance私有变量并返回一个函数
+//2. 如果instance存在则返回instance变量，如果instance不存在则返回后面那个函数。
+//以上是为了确保只存在一个弹窗实例
 
 //按钮操作
 
