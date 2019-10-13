@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nums = [-95,92,-85,59,-59,-14,88,-39,2,92,94,79,78,-58,37,48,63,-91,91,74,-28,39,90,-9,-72,-88,-72,93,38,14,-83,-2,21,4,-75,-65,3,63,100,59,-48,43,35,-49,48,-36,-64,-13,-7,-29,87,34,56,-39,-5,-27,-28,10,-57,100,-43,-98,19,-59,78,-28,-91,67,41,-64,76,5,-58,-89,83,26,-7,-82,-32,-76,86,52,-6,84,20,51,-86,26,46,35,-23,30,-51,54,19,30,27,80,45,22];
+        let k = 10;
+
+        var maxSlidingWindow = function(nums, k) {
+            let window = [],res = [];
+            for (let i = 0 ; i < nums.length; i++){
+                //1. 当往队列插入数字时，我们需要对其进行判断是否大于最大值，是否超出边界？如果超出边界。则将左边一位淘汰。再进行比较
+                if(i >= k && window[0] <= i - k ){//边界检测
+                    window.shift()
+                }
+
+                //2. 接下来的这个比较，无论是说超出后进行的比较最大值，还是说没有超出的最大值，都是需要进行对进来的那个新的数比对，然后
+                //对其窗口内的数据进行清除。然后再加入到窗口第一个位置
+                let temp = 1;
+                while(window && nums[window[0]] <= nums[i] && temp < window.length){//存在着当窗口第一个元素比新进来的那个元素小时。我们需要进行排出。
+                    if(nums[window[temp]] < nums[i]){
+                       window.splice(temp, 1);
+                       temp--;
+                    }
+                    temp++;
+                    window.shift()
+                }
+
+                //对于[5, 3] (队列长度为3),后一个元素要加入 4 ，我们的目标是要4插入后，把3删除掉，然后排在5后面，所以
+                // let temp = 1;
+                // while(window  && temp < window.length){
+                //     if(nums[window[temp]] < nums[i]){
+                //        window.splice(temp, 1);
+                //        temp--;
+                //     }
+                //     temp++;
+                // }
+
+                window.push(i);
+                //3. 对符合情况的数据进行加入
+                if(i >= k - 1){
+                    res.push(nums[window[0]])
+                }
+                console.log(window, "3处", res)
+            }
+            return res
+        };
+
+        console.log(maxSlidingWindow(nums, k))
+    </script>
+</body>
+</html>
+

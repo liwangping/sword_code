@@ -1,0 +1,44 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let s = "a", t = "ab";
+
+        let arr_1 = s.split("");
+        let arr_2 = t.split("");
+
+        let dic1 = new Map();
+        let dic2 = new Map();
+        function test() {
+            if(a.length !== b.length){
+                return false;
+            }
+            for(let item in arr_1){
+                dic1.set(arr_1[item], (dic1.get(arr_1[item]) || 0) + 1);
+            }
+
+            for(let item in arr_2){
+                dic2.set(arr_2[item], (dic2.get(arr_2[item]) || 0) + 1);
+            }
+
+            for(let [key, value] of dic1){
+                if(!dic2.has(key) || dic2.get(key) != value){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        console.log(test());
+        // console.log(dic1, dic2, dic1 == dic2)    
+    </script>
+</body>
+</html>
