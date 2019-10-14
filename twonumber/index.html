@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nums = [2, 7, 6, 8,10,29];
+        let k = 39;
+
+        let sum = function(nums, k){
+            const res = new Map();
+            for(let i = 0; i < nums.length; i++){
+                const otherIndex = res.get(k - nums[i]);
+                if(otherIndex !== undefined){
+                    return [ otherIndex, i]
+                }
+                res.set(nums[i], i);
+                
+            }
+        }
+
+        console.log(sum(nums, 39))
+    </script>
+</body>
+</html>
+<!-- const map = new Map()
+  for (let i = 0; i < nums.length; i ++) {
+    const otherIndex = map.get(target - nums[i])
+    if (otherIndex !== undefined) return [otherIndex, i]
+    map.set(nums[i], i)
+  } -->
+
+
